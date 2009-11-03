@@ -5,6 +5,12 @@ include_once dirname(__FILE__) . '/requirement.php';
 class ReqList
 {
 	protected $reqs = array();
+	protected $colors_priority = array("#a50026", "#d73027", "#f46d43", "#fdae61", "#fee08b", "#ffffbf",
+					    "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850", "#006837");
+
+	protected $colors_status = array('Unknown'=>'white', 'Reserved'=>'#377eb8','New'=>'#fbb4ae',
+					'Agreed'=>'#decbe4','Implemented'=>'#ffff33','Tested'=>'#ccebc5',
+					'Deleted'=>'black');
 
 	public function addReq($req)
 	{
@@ -45,15 +51,17 @@ class ReqList
 
 		foreach($this->reqs as $i => $value)
 		{
+			$idx_priority = (sizeof($this->colors_priority)-1) * (100-100) / 100;
+			
 			$index = $this->getPrefixIndex($prefixes, $value->getPrefix());
 			$res = $res.'"'.$value->name.'" [URL="'.$value->name
 				.'",label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
 				<TR>
 					<TD PORT="f0" BGCOLOR="'.$colors[$index].'" ROWSPAN="2">'.$value->title.'</TD>
-					<td BGCOLOR="red"><font COLOR="WHITE" FACE="Courier">High</font></td>
+					<td BGCOLOR="'.$this->colors_priority[$idx_priority].'"><font COLOR="WHITE"> </font></td>
 				</TR>
 				<TR>
-					<td BGCOLOR="blue"><font COLOR="WHITE">Tested</font></td>
+					<td BGCOLOR="'.$this->colors_status[$value->status].'"><font COLOR="WHITE" FACE="Courier"> </font></td>
 				</TR>
 				</TABLE>>'
 				.'];'."\n";

@@ -3,7 +3,7 @@
 
 CREATE TABLE IF NOT EXISTS `breeze_Reqs` (
   `name` varchar(100) collate utf8_unicode_ci NOT NULL,
-  `status` enum('Unknown','Reserved','New','Agreed','Deleted') collate utf8_unicode_ci NOT NULL default 'New',
+  `status` enum('Unknown','Reserved','New','Agreed','Implemented','Tested','Deleted') collate utf8_unicode_ci NOT NULL default 'New',
   `title` text collate utf8_unicode_ci NOT NULL,
   `body` text collate utf8_unicode_ci NOT NULL,
   `test` text collate utf8_unicode_ci NOT NULL,

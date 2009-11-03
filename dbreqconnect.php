@@ -11,7 +11,7 @@ class DBReqConnect
 	protected $user = "wikiuser";
 	protected $pass = "qwerty";
 	protected $db   = "wikidb";
-	protected $query = 'SELECT name, test,title, version, body, upward, comment,status FROM ';
+	protected $query = 'SELECT name, test,title, version, body, upward, comment,status,priority FROM ';
 	protected $table = 'breeze_Reqs';
 
 	public function readByName($name)
@@ -136,7 +136,7 @@ class DBReqConnect
 			return false;
 		}
 
-		$query='insert into '.$table.'(name, title, version, body, upward, comment, test, status) VALUES(\''.
+		$query='insert into '.$this->table.'(name, title, version, body, upward, comment, test, priority, status) VALUES(\''.
 			mysql_escape_string($req->name).'\',\''.
 			mysql_escape_string($req->title).'\','.
 			'1,\''.	// Version for new REQ=1
@@ -144,8 +144,9 @@ class DBReqConnect
 			mysql_escape_string($req->upward).'\',\''.
 			mysql_escape_string($req->comment).'\',\''.
 			mysql_escape_string($req->test).'\',\''.
+			mysql_escape_string($req->priority).'\',\''.
 			mysql_escape_string($req->status).
-			'\') ON DUPLICATE KEY UPDATE name=VALUES(name), title=VALUES(title), version=version+1, body=VALUES(body), upward=VALUES(upward), test=VALUES(test), status=VALUES(status), comment=VALUES(comment)';
+			'\') ON DUPLICATE KEY UPDATE name=VALUES(name), title=VALUES(title), version=version+1, body=VALUES(body), upward=VALUES(upward), test=VALUES(test), status=VALUES(status), comment=VALUES(comment), priority=VALUES(priority)';
 		echo $query;
 		$result = mysql_query($query, $link);
 

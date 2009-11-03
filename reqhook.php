@@ -1,18 +1,4 @@
 <?php
-/**
-
-CREATE TABLE IF NOT EXISTS `breeze_Reqs` (
-  `name` varchar(100) collate utf8_unicode_ci NOT NULL,
-  `status` enum('Unknown','Reserved','New','Agreed','Implemented','Tested','Deleted') collate utf8_unicode_ci NOT NULL default 'New',
-  `title` text collate utf8_unicode_ci NOT NULL,
-  `body` text collate utf8_unicode_ci NOT NULL,
-  `test` text collate utf8_unicode_ci NOT NULL,
-  `comment` text collate utf8_unicode_ci NOT NULL,
-  `upward` text collate utf8_unicode_ci NOT NULL,
-  `version` int(11) NOT NULL default '1',
-  PRIMARY KEY  (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
- */
 
 # Alert the user that this is not a valid entry point to MediaWiki if they try to access the extension file directly.
 if (!defined('MEDIAWIKI')) {

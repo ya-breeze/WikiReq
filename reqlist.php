@@ -51,14 +51,14 @@ class ReqList
 
 		foreach($this->reqs as $i => $value)
 		{
-			$idx_priority = (sizeof($this->colors_priority)-1) * (100-100) / 100;
+			$idx_priority = (sizeof($this->colors_priority)-1) * (100 - $value->priority) / 100;
 			
 			$index = $this->getPrefixIndex($prefixes, $value->getPrefix());
 			$res = $res.'"'.$value->name.'" [URL="'.$value->name
 				.'",label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
 				<TR>
 					<TD PORT="f0" BGCOLOR="'.$colors[$index].'" ROWSPAN="2">'.$value->title.'</TD>
-					<td BGCOLOR="'.$this->colors_priority[$idx_priority].'"><font COLOR="WHITE"> </font></td>
+					<td BGCOLOR="'.$this->colors_priority[$idx_priority].'"><font COLOR="WHITE">'.$value->priority.'</font></td>
 				</TR>
 				<TR>
 					<td BGCOLOR="'.$this->colors_status[$value->status].'"><font COLOR="WHITE" FACE="Courier"> </font></td>

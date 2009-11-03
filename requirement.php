@@ -9,6 +9,7 @@ class Requirement
 	public $status;
 	public $version;
 	public $test;
+	public $priority;
 
 	public static function reqFromRow($row)
 	{
@@ -23,6 +24,7 @@ class Requirement
 		$res->status = $row['status'];
 		$res->version = $row['version'];
 		$res->test = $row['test'];
+		$res->priority = $row['priority'];
 
 		if( empty($res->status) )
 			$res->status = 'New';
@@ -41,6 +43,7 @@ class Requirement
 		$res->status = $req->status;
 		$res->version = $req->version;
 		$res->test = $req->test;
+		$res->priority = $req->priority;
 
 		if( empty($res->status) )
 			$res->status = 'New';

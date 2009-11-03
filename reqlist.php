@@ -40,16 +40,23 @@ class ReqList
 		$colors = array('white','lightblue','burlywood','salmon');
 		$prefixes = array();
 
-		$res = "<graphviz format='png' width=$width>\ndigraph{\nlayout=".$layout.";\nnode [shape=record,style=filled];\n";
+		$res = "<graphviz format='png' width=".$width.">\ndigraph{\nlayout=".$layout
+			.";\nnode [shape=plaintext,fontname=undotum,terminus,georgia];\n";
 
 		foreach($this->reqs as $i => $value)
 		{
 			$index = $this->getPrefixIndex($prefixes, $value->getPrefix());
 			$res = $res.'"'.$value->name.'" [URL="'.$value->name
-				.'",label="<f0>'.$value->title.'|{ <f1> 100 | <f2> done}'
-				.'",color="'.'black'
-				.'",fillcolor="'.$colors[$index]
-				.'"];'."\n";
+				.'",label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR>
+					<TD PORT="f0" BGCOLOR="'.$colors[$index].'" ROWSPAN="2">'.$value->title.'</TD>
+					<td BGCOLOR="red"><font COLOR="WHITE" FACE="Courier">High</font></td>
+				</TR>
+				<TR>
+					<td BGCOLOR="blue"><font COLOR="WHITE">Tested</font></td>
+				</TR>
+				</TABLE>>'
+				.'];'."\n";
 		}
 
 		$res = $res . "\n";
@@ -62,7 +69,7 @@ class ReqList
 			$upward=$value->getUpwardReqs();
 			foreach($upward as $j => $reqvalue)
 			{
-				$res = $res . '"'.$value->name.'"->"'.$j.'"'."\n";
+				$res = $res . '"'.$value->name.'":f0->"'.$j.'":f0'."\n";
 			}
 		}
 

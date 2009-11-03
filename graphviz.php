@@ -142,10 +142,15 @@ function renderGraphviz( $timelinesrc, $argv )	// Raw Script data
 		fwrite($handle, $timelinesrc);
 		fclose($handle);
 
-		$cmdline    = wfEscapeShellArg($wgGraphVizSettings->dotCommand).
-			' -Tpng   -o '.wfEscapeShellArg($imgn).' '.wfEscapeShellArg($src);
-		$cmdlinemap = wfEscapeShellArg($wgGraphVizSettings->dotCommand).
-			' -Tcmapx -o '.wfEscapeShellArg($mapn).' '.wfEscapeShellArg($src);
+//twopi -Goverlap=orthoxy -Tpng 1 >1.png
+//		$cmdline    = wfEscapeShellArg($wgGraphVizSettings->dotCommand).
+//			' -Tpng   -o '.wfEscapeShellArg($imgn).' '.wfEscapeShellArg($src);
+//		$cmdlinemap = wfEscapeShellArg($wgGraphVizSettings->dotCommand).
+//			' -Tcmapx -o '.wfEscapeShellArg($mapn).' '.wfEscapeShellArg($src);
+		$cmdline    = wfEscapeShellArg("/usr/bin/twopi").
+			' -Goverlap=orthoxy -Tpng   -o '.wfEscapeShellArg($imgn).' '.wfEscapeShellArg($src);
+		$cmdlinemap = wfEscapeShellArg("/usr/bin/twopi").
+			' -Goverlap=orthoxy -Tcmapx -o '.wfEscapeShellArg($mapn).' '.wfEscapeShellArg($src);
 
 		$ret = shell_exec($cmdline);
 		if ($wgGraphVizSettings->install && $ret == "" ) {
